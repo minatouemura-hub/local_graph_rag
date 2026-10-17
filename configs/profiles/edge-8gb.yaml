@@ -1,0 +1,21 @@
+name: edge-8gb
+ocr:
+  backend: dots_ocr
+  quantization: Q8_0
+embedding:
+  backend: multilingual-e5-small
+  device: cpu
+generator:
+  backend: qwen3-1.7b
+  quantization: Q4_K_M
+  thinking: false
+  context_window: 4096
+  max_output_tokens: 384
+  safety_margin_tokens: 1024
+runtime:
+  max_concurrency: 1
+  model_lifecycle: worker_process
+retrieval:
+  dense_candidates: 20
+  sparse_candidates: 20
+  context_chunks: 5

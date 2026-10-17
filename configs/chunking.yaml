@@ -1,0 +1,3 @@
+chunking:
+  max_tokens: 512
+  chars_per_token: 4

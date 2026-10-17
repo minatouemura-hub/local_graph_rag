@@ -1,0 +1,30 @@
+{
+  "document_id": "manual-001",
+  "path": "fixtures/manual.pdf",
+  "pages": [
+    {
+      "page": 1,
+      "blocks": [
+        {"block_id": "b-title", "text": "製品マニュアル", "layout_type": "Title", "order": 0, "bbox": [10, 10, 200, 40]},
+        {"block_id": "b-pre", "text": "これは前文です。", "layout_type": "Text", "order": 1, "bbox": [10, 50, 200, 70]},
+        {"block_id": "b-h1", "text": "1. 安全上の注意", "layout_type": "Section-header", "order": 2, "bbox": [10, 90, 250, 115]},
+        {"block_id": "b-t1", "text": "本装置を使用する前に...", "layout_type": "Text", "order": 3, "bbox": [10, 120, 250, 145]},
+        {"block_id": "b-t2", "text": "必ず電源を切ってください。", "layout_type": "Text", "order": 4, "bbox": [10, 150, 250, 175]},
+        {"block_id": "b-l1", "text": "水に濡らさない", "layout_type": "List-item", "order": 5, "bbox": [20, 180, 200, 200]},
+        {"block_id": "b-l2", "text": "分解しない", "layout_type": "List-item", "order": 6, "bbox": [20, 205, 200, 225]},
+        {"block_id": "b-table", "text": "<table><tr><td>温度</td><td>0-40C</td></tr></table>", "layout_type": "Table", "order": 7, "bbox": [10, 230, 300, 300]},
+        {"block_id": "b-cap", "text": "表1 動作条件", "layout_type": "Caption", "order": 8, "bbox": [10, 305, 180, 325]},
+        {"block_id": "b-formula", "text": "P = VI", "layout_type": "Formula", "order": 9, "bbox": [10, 330, 100, 350]},
+        {"block_id": "b-h2", "text": "2. 使用方法", "layout_type": "Section-header", "order": 10, "bbox": [10, 370, 200, 395]},
+        {"block_id": "b-t3", "text": "電源を接続します。", "layout_type": "Text", "order": 11, "bbox": [10, 400, 200, 425]}
+      ]
+    },
+    {
+      "page": 2,
+      "blocks": [
+        {"block_id": "b-t4", "text": "次に起動ボタンを押します。", "layout_type": "Text", "order": 0, "bbox": [10, 20, 240, 45]},
+        {"block_id": "b-foot", "text": "注: 必ず説明書を確認してください。", "layout_type": "Footnote", "order": 1, "bbox": [10, 700, 260, 720]}
+      ]
+    }
+  ]
+}

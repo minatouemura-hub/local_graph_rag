@@ -1,0 +1,1 @@
+"""Local, layout-aware GraphRAG."""

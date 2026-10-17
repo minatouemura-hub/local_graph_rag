@@ -1,0 +1,33 @@
+2026-10-17T19:59:00+09:00 repository inspected: empty workspace, no existing git worktree
+2026-10-17T19:59:00+09:00 created MVP package skeleton, ports, domain DTOs, E5 adapter, dots.ocr adapter, retrieval pipeline, 8GB profile, memory benchmark script
+2026-10-17T20:00:00+09:00 python3 compileall and RRF smoke test passed
+2026-10-17T20:01:00+09:00 Ladybug schema/connection adapter and llama.cpp generator boundary added; compile smoke passed
+2026-10-17T20:02:00+09:00 created empty project directories with .gitkeep: data/raw, data/ocr, data/processed, data/db, workers, infrastructure, tests, docs
+2026-10-17T20:10:00+09:00 LayoutAwareChunker, fixture, and unit tests added; compileall passed; pytest unavailable (No module named pytest); direct harness initially found incorrect long-text test expectation
+2026-10-17T20:11:00+09:00 compileall passed; direct LayoutAwareChunker test harness: 10/10 passed; pytest remains unavailable
+2026-10-17T20:12:00+09:00 pytest tests/unit/test_layout_chunker.py -v could not start because pytest is not installed; no OCR, LadybugDB, embedding, or generator execution performed
+2026-10-17T20:20:00+09:00 added runnable fixture CLI; compileall passed; OCRDocument fixture converted to 10 deterministic chunks
+2026-10-17T20:21:00+09:00 full pytest exit=1; direct harness 10/10 passed; pytest output: /opt/homebrew/opt/python@3.14/bin/python3.14: No module named pytest 
+2026-10-17T20:30:00+09:00 installed pytest, pytest-cov, ruff, mypy into conda base via escalated network access; pytest 10 passed; ruff passed; compileall passed
+2026-10-17T20:45:00+09:00 installed ladybug 0.21.2 into conda base; verified Database/Connection/create/match smoke
+2026-10-17T20:45:00+09:00 implemented Ladybug Document/Page/Section/Chunk schema, HAS_PAGE/HAS_SECTION/HAS_CHUNK/NEXT, Chunk round-trip, HNSW vector search, Japanese-friendly BM25 FTS, graph NEXT and same-section expansion, RRF HybridRetriever and deduplication
+2026-10-17T20:45:00+09:00 added tests/integration/test_ladybug_retrieval.py (7 integration tests) and scripts/run_retrieval_fixture.py
+2026-10-17T20:45:00+09:00 validation: pytest 17 passed; ruff passed; compileall passed; mypy src passed; retrieval fixture CLI completed successfully
+2026-10-17T20:45:00+09:00 unresolved: fixture uses deterministic fake vectors; real E5, OCR, Generator, PDF indexing and memory benchmark remain intentionally out of scope
+2026-10-17T20:50:00+09:00 adjusted HybridRetriever seed_limit so graph-expanded candidates can enter final context; final validation: pytest 17 passed, ruff passed, compileall passed, mypy passed, retrieval CLI showed graph provenance
+2026-10-17T21:05:00+09:00 ran data/raw/tbio.pdf End-to-End with local Tesseract jpn+eng; 13 pages rasterized/OCR'd, 13 OCR blocks, 23 chunks, OCR JSON and temporary Ladybug DB written under data/ocr/tbio-e2e
+2026-10-17T21:05:00+09:00 E2E RetrievalContext returned 5 items with vector, fulltext, and graph:next provenance; post-E2E validation: pytest 17 passed, ruff passed, compileall passed, mypy passed
+2026-10-17T21:05:00+09:00 E2E limitation: infrastructure validation used deterministic local hash embeddings; no external API, dots.ocr, Qwen, or remote service used
+2026-10-17T21:01:09+09:00 real-model setup: created conda env local-graphrag (Python 3.11), installed torch 2.14.1, sentence-transformers 5.7.0, transformers 5.20.1, Ladybug 0.21.2; base NumPy/libgfortran remained unusable, so real-model experiments use the dedicated env
+2026-10-17T21:01:09+09:00 real E5 smoke passed: intfloat/multilingual-e5-small, 384 dimensions, CPU, Japanese query/passage cosine similarity 0.8688679933547974; KMP_DUPLICATE_LIB_OK=TRUE and OMP/MKL threads=1 required on this installation
+2026-10-17T21:01:09+09:00 real Qwen smoke passed: ggml-org/Qwen3-1.7B-GGUF:Q4_K_M via Metal llama.cpp 0.7.0; Japanese non-thinking generation completed
+2026-10-17T21:01:09+09:00 real dots.ocr smoke passed: ggml-org/dots.ocr-GGUF:Q8_0 via llama-mtmd-cli; page 1 of data/raw/tbio.pdf produced Markdown-like Japanese OCR (2114 chars), saved under data/experiments/real-models-run2/dots_ocr_page1.txt
+2026-10-17T21:01:09+09:00 real-model integration reached PDF OCR (13 pages), LayoutAwareChunker (23 chunks), real E5 embeddings, Ladybug HNSW/BM25/graph retrieval (5 context items); Qwen call first failed because prompt was 4624 tokens > 4096 context, then generator was patched with context truncation and subprocess simple-io options; rerun was user-aborted before completion
+2026-10-17T21:18:33+09:00 real-model reruns: dots.ocr page-1 OCR and real E5/Ladybug retrieval completed repeatedly; short real Qwen Generator prompt passed and returned Japanese answer. Full retrieved Japanese OCR context caused llama.cpp/Qwen to terminate with an empty generation at both 4096 and 8192 context settings; this is recorded as a current long-context generation limitation, not a model-load failure
+2026-10-17T21:18:33+09:00 adapter hardening: LlamaCppGenerator now supports Hugging Face GGUF refs, context character limit, UTF-8 replacement, subprocess simple-io, and output cleanup; DotsOCRBackend uses llama-mtmd-cli GGUF and preserves page OCR as a normalized Text block
+2026-10-17T21:18:33+09:00 validation after real-model adapter changes: pytest 17 passed; ruff passed; compileall passed; mypy src passed
+2026-10-17T21:32:37+09:00 added TokenBudgetContextPacker and QueryPipeline packing; conservative tokenizer-free token estimate documented; diagnostics now record prompt chars/tokens, context window, output limit, return code, elapsed time, generated estimate, raw stream lengths, thinking mode, and no_think application
+2026-10-17T21:32:37+09:00 context sweep report: 1 chunk=1146 prompt tokens/288 generated, 2=2170/205, 3=3225/12, 4=3574/37, 5=3674/37; all return_code=0 and raw stdout contained answers. Initial empty-answer diagnosis was parser loss of output after llama.cpp prompt display truncation marker, not process failure
+2026-10-17T21:32:37+09:00 fixed Generator parser for llama.cpp prompt display/truncated output and added raw stdout/stderr files; packed PDF rerun: 5 retrieved chunks -> 2 packed chunks, estimated retrieval tokens 3581 -> 2095, budget 2552, prompt tokens 2170, return_code=0, generated_tokens=270, non-empty Japanese answer returned
+2026-10-17T21:32:37+09:00 added context packer, generator, and QueryPipeline tests; final validation: pytest 23 passed; ruff passed; compileall passed; mypy src passed
+2026-10-17T21:34:59+09:00 added external README.md covering architecture, local setup, fixture demo, real PDF experiment, context sweep, diagnostics, tests, repository layout, and current limitations
